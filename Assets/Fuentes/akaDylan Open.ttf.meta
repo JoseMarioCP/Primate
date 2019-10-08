@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: d8c51c9b593d06446ac9b43a7cc99f09
+timeCreated: 1525993151
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: akaDylan Open
+  fontNames:
+  - akaDylan Open
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

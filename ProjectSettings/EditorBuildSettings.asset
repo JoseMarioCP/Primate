@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/esenas/Portada/PortadaJuego.unity
+    guid: 38f7a37aedf64de498aaaf9bfbdf0eb3
+  - enabled: 1
+    path: Assets/esenas/1rst/Contar/N1 Contar.unity
+    guid: f68b6cc6ab7c5744387ba5047a381d72
+  - enabled: 1
+    path: Assets/esenas/1rst/NumerosPalabras/N1 NumeroPalabra.unity
+    guid: 2f59c86dc4a702f478951f9369560163
+  - enabled: 1
+    path: Assets/esenas/1rst/CompararNumeros/N1 CompararNumeros.unity
+    guid: 746c663c29192d44b9e30ce2378d07f0
+  - enabled: 1
+    path: Assets/esenas/1rst/OrdenNumeros/N1 OrdenNumeros.unity
+    guid: 161a2a812219af7419df53a7417d9035
+  m_configObjects: {}

@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 8fb5b629386e45641a4a556122d60d5c
+timeCreated: 1525993151
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: JuneBug
+  fontNames:
+  - JuneBug
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
