@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Palabras1 : MonoBehaviour
 {
 
-
+    public Musica sonidos;
     public GameObject contenedor,fondo;
     public int IntentosJugar;
     //public Puntos Marcador;
@@ -29,8 +29,8 @@ public class Palabras1 : MonoBehaviour
     void Start()
     {
         generarNumero();
-        colocar_nombres();
-
+        // colocar_nombres();
+        StartCoroutine(Nuevo_Numero());
     }
 
     // Update is called once per frame
@@ -52,7 +52,7 @@ public class Palabras1 : MonoBehaviour
     IEnumerator Nuevo_Numero()
     {
         yield return new WaitForSeconds(0.5f);
-        objGanar.SetActive(false);
+        //objGanar.SetActive(false);
         generarNumero();
        
     }
@@ -73,9 +73,9 @@ public class Palabras1 : MonoBehaviour
                         if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numero)
                         {
                             respuestas[x].gameObject.GetComponent<DAD_P1>().bloqueado = false;
-                            Correcto.text = "Respuesta Correccta";
-                            objGanar.SetActive(true);
-
+                            // Correcto.text = "Respuesta Correccta";
+                            //objGanar.SetActive(true);
+                            sonidos.Correcta();
                             iteraciones++;
                             //Marcador.Incrementar();
                             Marcador.incrementarPuntos();
@@ -88,8 +88,9 @@ public class Palabras1 : MonoBehaviour
                         if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre != numero)
                         {
                             respuestas[x].gameObject.GetComponent<DAD_P1>().bloqueado = false;
-                            Correcto.text = "Respuesta Incorrecta";
-                            objGanar.SetActive(true);
+                            //Correcto.text = "Respuesta Incorrecta";
+                            //objGanar.SetActive(true);
+                            sonidos.Incorrecta();
                             iteraciones++;
                             Marcador.decrementarPuntos();
 
@@ -112,9 +113,11 @@ public class Palabras1 : MonoBehaviour
                         if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numero)
                         {
                             respuestas[x].gameObject.GetComponent<DAD_P2>().bloqueado = false;
-                            Correcto.text = "Respuesta Correccta";
-                            objGanar.SetActive(true);
+                            //Correcto.text = "Respuesta Correccta";
+                            // objGanar.SetActive(true);
                             //Marcador.Incrementar();
+
+                            sonidos.Correcta();
                             iteraciones++;
                             Marcador.incrementarPuntos();
                            
@@ -124,8 +127,9 @@ public class Palabras1 : MonoBehaviour
                         if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre != numero)
                         {
                             respuestas[x].gameObject.GetComponent<DAD_P2>().bloqueado = false;
-                            Correcto.text = "Respuesta Incorrecta";
-                            objGanar.SetActive(true);
+                            //Correcto.text = "Respuesta Incorrecta";
+                            //objGanar.SetActive(true);
+                            sonidos.Incorrecta();
                             iteraciones++;
                             Marcador.decrementarPuntos();
                             
@@ -144,9 +148,10 @@ public class Palabras1 : MonoBehaviour
                         if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numero)
                         {
                             respuestas[x].gameObject.GetComponent<DAD_P3>().bloqueado = false;
-                            Correcto.text = "Respuesta Correccta";
-                            objGanar.SetActive(true);
+                            //Correcto.text = "Respuesta Correccta";
+                            //objGanar.SetActive(true);
                             // Marcador.Incrementar();
+                            sonidos.Correcta();
                             iteraciones++;
                             Marcador.incrementarPuntos();
                            
@@ -156,8 +161,9 @@ public class Palabras1 : MonoBehaviour
                         if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre != numero)
                         {
                             respuestas[x].gameObject.GetComponent<DAD_P3>().bloqueado = false;
-                            Correcto.text = "Respuesta Incorrecta";
-                            objGanar.SetActive(true);
+                            //Correcto.text = "Respuesta Incorrecta";
+                            // objGanar.SetActive(true);
+                            sonidos.Incorrecta();
                             iteraciones++;
                             Marcador.decrementarPuntos();
                           
@@ -176,9 +182,10 @@ public class Palabras1 : MonoBehaviour
                         if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numero)
                         {
                             respuestas[x].gameObject.GetComponent<DAD_P4>().bloqueado = false;
-                            Correcto.text = "Respuesta Correccta";
-                            objGanar.SetActive(true);
+                            //Correcto.text = "Respuesta Correccta";
+                            //objGanar.SetActive(true);
                             //Marcador.Incrementar();
+                            sonidos.Correcta();
                             iteraciones++;
                             Marcador.incrementarPuntos();
                            
@@ -188,7 +195,8 @@ public class Palabras1 : MonoBehaviour
                         if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre != numero)
                         {
                             respuestas[x].gameObject.GetComponent<DAD_P4>().bloqueado = false;
-                            Correcto.text = "Respuesta Incorrecta";
+                            // Correcto.text = "Respuesta Incorrecta";
+                            sonidos.Incorrecta();
                             iteraciones++;
                             Marcador.decrementarPuntos();
                            
@@ -209,9 +217,10 @@ public class Palabras1 : MonoBehaviour
                         if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numero)
                         {
                             respuestas[x].gameObject.GetComponent<DAD_P5>().bloqueado = false;
-                            Correcto.text = "Respuesta Correccta";
-                            objGanar.SetActive(true);
+                            //Correcto.text = "Respuesta Correccta";
+                            //objGanar.SetActive(true);
                             // Marcador.Incrementar();
+                            sonidos.Correcta();
                             iteraciones++;
                             Marcador.incrementarPuntos();
                            
@@ -221,8 +230,9 @@ public class Palabras1 : MonoBehaviour
                         if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre != numero)
                         {
                             respuestas[x].gameObject.GetComponent<DAD_P5>().bloqueado = false;
-                            Correcto.text = "Respuesta Incorrecta";
-                            objGanar.SetActive(true);
+                            // Correcto.text = "Respuesta Incorrecta";
+                            //objGanar.SetActive(true);
+                            sonidos.Incorrecta();
                             iteraciones++;
                             Marcador.decrementarPuntos();
                            
@@ -241,9 +251,10 @@ public class Palabras1 : MonoBehaviour
                         if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numero)
                         {
                             respuestas[x].gameObject.GetComponent<DAD_P6>().bloqueado = false;
-                            Correcto.text = "Respuesta Correccta";
-                            objGanar.SetActive(true);
+                            // Correcto.text = "Respuesta Correccta";
+                            // objGanar.SetActive(true);
                             //Marcador.Incrementar();
+                            sonidos.Correcta();
                             iteraciones++;
                             Marcador.incrementarPuntos();
 
@@ -253,8 +264,9 @@ public class Palabras1 : MonoBehaviour
                         if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre != numero)
                         {
                             respuestas[x].gameObject.GetComponent<DAD_P6>().bloqueado = false;
-                            Correcto.text = "Respuesta Incorrecta";
-                            objGanar.SetActive(true);
+                            //Correcto.text = "Respuesta Incorrecta";
+                            //objGanar.SetActive(true);
+                            sonidos.Incorrecta();
                             iteraciones++;
                             Marcador.decrementarPuntos();
 
@@ -274,9 +286,10 @@ public class Palabras1 : MonoBehaviour
                         if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numero)
                         {
                             respuestas[x].gameObject.GetComponent<DAD_P7>().bloqueado = false;
-                            Correcto.text = "Respuesta Correccta";
-                            objGanar.SetActive(true);
+                            //Correcto.text = "Respuesta Correccta";
+                            //objGanar.SetActive(true);
                             // Marcador.Incrementar();
+                            sonidos.Correcta();
                             iteraciones++;
                             Marcador.incrementarPuntos();
                             StartCoroutine(Nuevo_Numero());
@@ -285,8 +298,9 @@ public class Palabras1 : MonoBehaviour
                         if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre != numero)
                         {
                             respuestas[x].gameObject.GetComponent<DAD_P7>().bloqueado = false;
-                            Correcto.text = "Respuesta Incorrecta";
-                            objGanar.SetActive(true);
+                            // Correcto.text = "Respuesta Incorrecta";
+                            // objGanar.SetActive(true);
+                            sonidos.Incorrecta();
                             iteraciones++;
                             Marcador.decrementarPuntos();
                            
@@ -305,10 +319,11 @@ public class Palabras1 : MonoBehaviour
                         if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numero)
                         {
                             respuestas[x].gameObject.GetComponent<DAD_P8>().bloqueado = false;
-                            Correcto.text = "Respuesta Correccta";
-                            objGanar.SetActive(true);
+                            //Correcto.text = "Respuesta Correccta";
+                            //objGanar.SetActive(true);
 
                             //Marcador.Incrementar();
+                            sonidos.Correcta();
                             iteraciones++;
                             Marcador.incrementarPuntos();
                             StartCoroutine(Nuevo_Numero());
@@ -317,8 +332,9 @@ public class Palabras1 : MonoBehaviour
                         if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre != numero)
                         {
                             respuestas[x].gameObject.GetComponent<DAD_P8>().bloqueado = false;
-                            Correcto.text = "Respuesta Incorrecta";
-                            objGanar.SetActive(true);
+                            // Correcto.text = "Respuesta Incorrecta";
+                            // objGanar.SetActive(true);
+                            sonidos.Incorrecta();
                             iteraciones++;
                             Marcador.decrementarPuntos();
                             
@@ -337,9 +353,10 @@ public class Palabras1 : MonoBehaviour
                         if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numero)
                         {
                             respuestas[x].gameObject.GetComponent<DAD_P9>().bloqueado = false;
-                            Correcto.text = "Respuesta Correccta";
-                            objGanar.SetActive(true);
+                            //Correcto.text = "Respuesta Correccta";
+                            //objGanar.SetActive(true);
                             // Marcador.Incrementar();
+                            sonidos.Correcta();
                             iteraciones++;
                             Marcador.incrementarPuntos();
                             StartCoroutine(Nuevo_Numero());
@@ -348,8 +365,9 @@ public class Palabras1 : MonoBehaviour
                         if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre != numero)
                         {
                             respuestas[x].gameObject.GetComponent<DAD_P9>().bloqueado = false;
-                            Correcto.text = "Respuesta Incorrecta";
-                            objGanar.SetActive(true);
+                            // Correcto.text = "Respuesta Incorrecta";
+                            // objGanar.SetActive(true);
+                            sonidos.Incorrecta();
                             iteraciones++;
                             Marcador.decrementarPuntos();
                            
@@ -368,9 +386,10 @@ public class Palabras1 : MonoBehaviour
                         if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numero)
                         {
                             respuestas[x].gameObject.GetComponent<DAD_P10>().bloqueado = false;
-                            Correcto.text = "Respuesta Correccta";
-                            objGanar.SetActive(true);
+                            // Correcto.text = "Respuesta Correccta";
+                            // objGanar.SetActive(true);
                             // Marcador.Incrementar();
+                            sonidos.Correcta();
                             iteraciones++;
                             Marcador.incrementarPuntos();
                             StartCoroutine(Nuevo_Numero());
@@ -379,8 +398,9 @@ public class Palabras1 : MonoBehaviour
                         if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre != numero)
                         {
                             respuestas[x].gameObject.GetComponent<DAD_P10>().bloqueado = false;
-                            Correcto.text = "Respuesta Incorrecta";
-                            objGanar.SetActive(true);
+                            // Correcto.text = "Respuesta Incorrecta";
+                            // objGanar.SetActive(true);
+                            sonidos.Incorrecta();
                             iteraciones++;
                             Marcador.decrementarPuntos();
                            
@@ -419,6 +439,7 @@ public class Palabras1 : MonoBehaviour
             numero = Random.Range(1, 10);
             numerotxt.text = "" + numero;
             colocar_nombres();
+            //Invoke("colocar_nombres", f);
         }
 
         

@@ -6,25 +6,38 @@ using UnityEngine.SceneManagement;
 public class Opciones_Salida : MonoBehaviour
 {
     // Start is called before the first frame update
+    public ControlarAnimaciones animacion;
     public BotonesPulsados Reiniciar, volverInicio;
     public string reinciar, inicio;
 
     void Update()
     {
         if (Reiniciar.pulsado)
-            reiniciar();
+        {
+            animacion.animacionFinal();
+            StartCoroutine(reiniciarNivel());
+        }
+            
 
         if (volverInicio.pulsado)
-            Salirinicio();
+        {
+            animacion.animacionFinal();
+            StartCoroutine(SalirInicio());
+        }
+            
     }
 
-    void reiniciar()
+
+    IEnumerator reiniciarNivel()
     {
+        yield return new WaitForSeconds(1.3f);
         SceneManager.LoadScene(reinciar);
     }
 
-    void Salirinicio()
+    IEnumerator SalirInicio()
     {
+        yield return new WaitForSeconds(1.3f);
         SceneManager.LoadScene(inicio);
     }
+    
 }

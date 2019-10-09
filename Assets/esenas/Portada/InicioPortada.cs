@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class InicioPortada : MonoBehaviour
 {
+    public Musica sonidos;
     public GameObject logosprite;
     public GameObject canvasPrincipal,CanvasMenu;
     public Animator animacionInicial;
@@ -19,10 +20,12 @@ public class InicioPortada : MonoBehaviour
     {
         if(logo.pulsado)
         {
+            sonidos.brotar();
+            //sonidos.Correcta();
             animacionInicial.SetTrigger("desvanecer");
             canvasPrincipal.SetActive(false);
             CanvasMenu.SetActive(true);
-           
+            logo.pulsado = false;
         }
     }
 

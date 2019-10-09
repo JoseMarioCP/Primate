@@ -5,6 +5,11 @@ using UnityEngine.UI;
 
 public class OpcionesResultado : MonoBehaviour 
 {
+    /*
+     ESTABLECE LAS RESPUESTAS QUE APARECENE EN PANTALLA
+         */
+
+
 	//texto en pantalla de instrucciones
 	public GameObject Instrucciones;
 

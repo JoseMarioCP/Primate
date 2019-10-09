@@ -13,7 +13,7 @@ public class OpcionesAlTerminarJuego : MonoBehaviour {
 
 
 	public string esena;
-	string portada="PortadaDeJuego";
+	public string portada;
 	// Use this for initialization
 	
 	
@@ -23,16 +23,24 @@ public class OpcionesAlTerminarJuego : MonoBehaviour {
 	
 		if(reinciar.pulsado)
         {
-            SceneManager.LoadScene(esena);
             transiciones.animacionFinal();
+            //SceneManager.LoadScene(esena);
+            StartCoroutine(TiempoAnimacion(esena));
         }
 			
 
 		if(VolverMenu.pulsado)
         {
-            SceneManager.LoadScene(portada);
             transiciones.animacionFinal();
+            //SceneManager.LoadScene(portada);
+            StartCoroutine(TiempoAnimacion(portada));
         }
 			
 	}
+
+    IEnumerator TiempoAnimacion(string esenaM)
+    {
+        yield return new WaitForSeconds(1.2f);
+        SceneManager.LoadScene(esenaM);
+    }
 }

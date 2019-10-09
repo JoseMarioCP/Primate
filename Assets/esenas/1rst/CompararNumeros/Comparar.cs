@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Comparar : MonoBehaviour
 {
+
+    public Musica sonidos;
+
     public GameObject contenedor;
     public int numeroIntentos;
 
@@ -120,9 +123,10 @@ public class Comparar : MonoBehaviour
                         if (respuestas[x].gameObject.GetComponent<CaracteristicaComparacion>().valor == respuestaComparacion)
                         {
                             respuestas[x].gameObject.GetComponent<DAD_Comparacion1>().bloqueado = false;
-                            Correcto.text = "Respuesta Correccta";
-                            objGanar.SetActive(true);
+                            //Correcto.text = "Respuesta Correccta";
+                            //objGanar.SetActive(true);
                             //Marcador.Incrementar();
+                            sonidos.Correcta();
                             iteraciones++;
                             Marcador.incrementarPuntos();
                             StartCoroutine(Nuevo_Numero());
@@ -133,8 +137,9 @@ public class Comparar : MonoBehaviour
                         if (respuestas[x].gameObject.GetComponent<CaracteristicaComparacion>().valor != respuestaComparacion)
                         {
                             respuestas[x].gameObject.GetComponent<DAD_Comparacion1>().bloqueado = false;
-                            Correcto.text = "Respuesta Incorrecta";
-                            objGanar.SetActive(true);
+                            //Correcto.text = "Respuesta Incorrecta";
+                            //objGanar.SetActive(true);
+                            sonidos.Incorrecta();
                             iteraciones++;
                             Marcador.decrementarPuntos();
                             StartCoroutine(Nuevo_Numero());
@@ -156,9 +161,10 @@ public class Comparar : MonoBehaviour
                         if (respuestas[x].gameObject.GetComponent<CaracteristicaComparacion>().valor == respuestaComparacion)
                         {
                             respuestas[x].gameObject.GetComponent<DAD_Comparacion2>().bloqueado = false;
-                            Correcto.text = "Respuesta Correccta";
-                            objGanar.SetActive(true);
+                            //Correcto.text = "Respuesta Correccta";
+                            //objGanar.SetActive(true);
                             //Marcador.Incrementar();
+                            sonidos.Correcta();
                             iteraciones++;
                             Marcador.incrementarPuntos();
                             StartCoroutine(Nuevo_Numero());
@@ -167,8 +173,9 @@ public class Comparar : MonoBehaviour
                         if (respuestas[x].gameObject.GetComponent<CaracteristicaComparacion>().valor != respuestaComparacion)
                         {
                             respuestas[x].gameObject.GetComponent<DAD_Comparacion2>().bloqueado = false;
-                            Correcto.text = "Respuesta Incorrecta";
-                            objGanar.SetActive(true);
+                            //Correcto.text = "Respuesta Incorrecta";
+                            //objGanar.SetActive(true);
+                            sonidos.Incorrecta();
                             iteraciones++;
                             Marcador.decrementarPuntos();
                             StartCoroutine(Nuevo_Numero());
@@ -187,9 +194,10 @@ public class Comparar : MonoBehaviour
                         if (respuestas[x].gameObject.GetComponent<CaracteristicaComparacion>().valor == respuestaComparacion)
                         {
                             respuestas[x].gameObject.GetComponent<DAD_Comparacion3>().bloqueado = false;
-                            Correcto.text = "Respuesta Correccta";
-                            objGanar.SetActive(true);
+                            //Correcto.text = "Respuesta Correccta";
+                            //objGanar.SetActive(true);
                             // Marcador.Incrementar();
+                            sonidos.Correcta();
                             iteraciones++;
                             Marcador.incrementarPuntos();
                             StartCoroutine(Nuevo_Numero());
@@ -198,8 +206,9 @@ public class Comparar : MonoBehaviour
                         if (respuestas[x].gameObject.GetComponent<CaracteristicaComparacion>().valor != respuestaComparacion)
                         {
                             respuestas[x].gameObject.GetComponent<DAD_Comparacion3>().bloqueado = false;
-                            Correcto.text = "Respuesta Incorrecta";
-                            objGanar.SetActive(true);
+                            // Correcto.text = "Respuesta Incorrecta";
+                            // objGanar.SetActive(true);
+                            sonidos.Incorrecta();
                             iteraciones++;
                             Marcador.decrementarPuntos();
                             StartCoroutine(Nuevo_Numero());

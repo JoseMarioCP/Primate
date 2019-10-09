@@ -65,11 +65,11 @@ public class MostrarPuntuacionPantalla : MonoBehaviour
 		temaPrincipal3.Detener ();
 		desactivarObjetos ();
 		can2.gameObject.SetActive (true);
-		acierto.text = " " + respuestas.respuestaCorrecta;
-		palomita.gameObject.SetActive (true);
-		incorrectas.text = " " + respuestas.respuestasIncorrectas; 
-		tachita.gameObject.SetActive (true);
-
+        //acierto.text = " " + respuestas.respuestaCorrecta;
+        //palomita.gameObject.SetActive (true);
+        //incorrectas.text = " " + respuestas.respuestasIncorrectas; 
+        //tachita.gameObject.SetActive (true);
+        Calificar();
 
 	}
 
@@ -93,5 +93,29 @@ public class MostrarPuntuacionPantalla : MonoBehaviour
 		*/
 	}
 
+
+
+    public void Calificar()
+    {
+        //canvasPrincipal.SetActive(false);
+
+        if (respuestas.respuestaCorrecta >= 9)
+        {
+            incorrectas.text = " Excelente";
+        }
+
+        if (respuestas.respuestaCorrecta >= 6 && respuestas.respuestaCorrecta <= 8)
+        {
+            incorrectas.text = "Muy Bien";
+        }
+
+        if (respuestas.respuestaCorrecta <= 5)
+        {
+            incorrectas.text = "Intenta de nuevo";
+        }
+        acierto.text = respuestas.respuestaCorrecta.ToString() + "/10";
+     //   canvasFinal.SetActive(true);
+
+    }
 
 }

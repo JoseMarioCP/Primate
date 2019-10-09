@@ -92,8 +92,8 @@ public class OrdenarNumeros : MonoBehaviour
         {
             valor1 = 0;
             valor2 = 0;
-            Correcto.text = "Respuesta Correccta";
-            objGanar.SetActive(true);
+           // Correcto.text = "Respuesta Correccta";
+           // objGanar.SetActive(true);
             //Marcador.Incrementar();
             iteraciones++;
             Marcador.incrementarPuntos();
@@ -103,8 +103,8 @@ public class OrdenarNumeros : MonoBehaviour
         }
         else
         {
-            Correcto.text = "Respuesta Incorrecta";
-            objGanar.SetActive(true);
+            //Correcto.text = "Respuesta Incorrecta";
+           // objGanar.SetActive(true);
             iteraciones++;
             StartCoroutine(Nuevo_Numero());
            

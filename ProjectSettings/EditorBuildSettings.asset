@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/esenas/1rst/OrdenNumeros/N1 OrdenNumeros.unity
     guid: 161a2a812219af7419df53a7417d9035
+  - enabled: 1
+    path: Assets/esenas/1rst/Operaciones Aritmecias/Suma/Nivel 1(Suma).unity
+    guid: 63a5864eca018674aa0574a55cf3dac4
   m_configObjects: {}

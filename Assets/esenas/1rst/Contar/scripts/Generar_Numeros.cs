@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Generar_Numeros : MonoBehaviour
 {
+    public Musica sonidos;
     public int numeroMinimo, numeroMaximo;
    public int intentos = 0;
     public int iteraciones = 0;
@@ -29,16 +30,17 @@ public class Generar_Numeros : MonoBehaviour
     private void Start()
     {
         Generacion_Numeros(numeroMinimo, numeroMaximo);
-        colocar_nombres();
+        //colocar_nombres();
     }
 
+
+    
     // Update is called once per frame
     void Update()
     {
-
-       
-
         verificar_Respuesta();
+
+        
         /*
         if(Input.GetKeyUp(KeyCode.Space))
         {
@@ -60,22 +62,42 @@ public class Generar_Numeros : MonoBehaviour
     }
 
 
+    IEnumerator tiempoObjetos()
+    {
+        Vector3 espacio = new Vector3(1f, 0f, 0f);
+        for (int x = 0; x < NumeroContar; x++)
+        {
+            yield return new WaitForSeconds(0.5f);
+            objetos.Add(Instantiate(muestra, instanciador.transform.position + espacio, Quaternion.identity));
+            espacio = espacio + new Vector3(Random.Range(-2,2), 0f, 0f);
+            sonidos.brotar();
+        }
+        yield return new WaitForSeconds(1.5f);
+        colocar_nombres();
+
+    }
+
+
     public void Generacion_Numeros(int n1, int n2)
     {
 
         if(iteraciones<intentos)
         {
+            
             //indica el numero de elemtos que se crearon de acuerdo al rango establecido
             NumeroContar = Random.Range(n1, n2);
+            StartCoroutine(tiempoObjetos());
 
-            Vector3 espacio = new Vector3(1f, 0f, 0f);
+
+            /*
+            //Vector3 espacio = new Vector3(1f, 0f, 0f);
             for (int x = 0; x < NumeroContar; x++)
             {
                 objetos.Add(Instantiate(muestra, instanciador.transform.position + espacio, Quaternion.identity));
                 espacio = espacio + new Vector3(1.7f, 0f, 0f);
 
             }
-
+            */
         }
         else
         {
@@ -101,21 +123,23 @@ public class Generar_Numeros : MonoBehaviour
 
                     if(respuestas[x].GetComponent<Caracteristica>().Numero_Nombre==NumeroContar)
                     {
+                        sonidos.Correcta();
                         iteraciones++;
                         Puntos.incrementarPuntos();
                         limpiar_respuestas();
                         limpiar_objetos();
-                        Generacion_Numeros(1,5);
-                        colocar_nombres();
+                        Generacion_Numeros(numeroMinimo,numeroMaximo);
+                       // colocar_nombres();
                     }
                     else
                     {
+                        sonidos.Incorrecta();
                         iteraciones++;
                         Puntos.decrementarPuntos();
                         limpiar_respuestas();
                         limpiar_objetos();
-                        Generacion_Numeros(1, 5);
-                        colocar_nombres();
+                        Generacion_Numeros(numeroMinimo, numeroMaximo);
+                        //colocar_nombres();
                     }
                 }
             }
@@ -125,6 +149,7 @@ public class Generar_Numeros : MonoBehaviour
         
     }
 
+    //colocar loos botontes en pantalla de acuerdo a una posicion
     void colocar_nombres()
     {
        // limpiar_respuestas();

@@ -7,7 +7,7 @@ public class Musica : MonoBehaviour
     //REFERENCIA AL AUDIO
     public AudioSource tema;
 
-    public AudioClip RespuestaC;
+    public AudioClip brotarObjeto, RespuestaC;
     public AudioClip RespuestaI;
     public AudioClip TiempoLimite;
 
@@ -26,6 +26,12 @@ public class Musica : MonoBehaviour
     {
         ReproduceSonido(TiempoLimite);
     }
+
+    public void brotar()
+    {
+        ReproduceSonido(brotarObjeto);
+    }
+
 
     void ReproduceSonido(AudioClip sonido)
     {
