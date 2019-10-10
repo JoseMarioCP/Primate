@@ -233,7 +233,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 178711218}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 444070836}
+        m_MethodName: Patrones
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &178711218
@@ -743,7 +754,7 @@ MonoBehaviour:
   n2: N1 NumeroPalabra
   n3: N1 CompararNumeros
   n4: N1 OrdenNumeros
-  n5: 
+  n5: PatronesMenu
   n6: Nivel 1(Suma)
 --- !u!1 &471354602
 GameObject:
@@ -2495,6 +2506,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Musica
       objectReference: {fileID: 0}
+    - target: {fileID: 6027923345543986148, guid: 7b71612a882326a46bc3dfc12f2f036d,
+        type: 3}
+      propertyPath: brotarObjeto
+      value: 
+      objectReference: {fileID: 8300000, guid: ebf32b61351dfb24ca77826aecc1677c, type: 3}
     - target: {fileID: 6027923345313594082, guid: 7b71612a882326a46bc3dfc12f2f036d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2558,7 +2574,7 @@ PrefabInstance:
     - target: {fileID: 6027923343933803245, guid: 7b71612a882326a46bc3dfc12f2f036d,
         type: 3}
       propertyPath: m_Volume
-      value: 0.064
+      value: 0.09
       objectReference: {fileID: 0}
     - target: {fileID: 6027923343933803245, guid: 7b71612a882326a46bc3dfc12f2f036d,
         type: 3}
@@ -2575,11 +2591,6 @@ PrefabInstance:
       propertyPath: m_Volume
       value: 0.086
       objectReference: {fileID: 0}
-    - target: {fileID: 6027923345543986148, guid: 7b71612a882326a46bc3dfc12f2f036d,
-        type: 3}
-      propertyPath: brotarObjeto
-      value: 
-      objectReference: {fileID: 8300000, guid: ebf32b61351dfb24ca77826aecc1677c, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b71612a882326a46bc3dfc12f2f036d, type: 3}
 --- !u!1 &2053026210

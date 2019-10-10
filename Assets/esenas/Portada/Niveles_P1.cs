@@ -27,6 +27,13 @@ public class Niveles_P1 : MonoBehaviour
         SceneManager.LoadScene(n4);
     }
 
+
+    public void Patrones()
+    {
+        
+        SceneManager.LoadScene(n5);
+    }
+
     public void Suma()
     {
         SceneManager.LoadScene(n6);
