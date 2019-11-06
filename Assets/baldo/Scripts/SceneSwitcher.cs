@@ -11,13 +11,14 @@ public class SceneSwitcher : MonoBehaviour
 
     public void GotoGameScene()
     {
-        Debug.Log("Abriendo Juego");
-        SceneManager.LoadScene("Juego");
-    }
 
-    public void GotoInicio()
-    {
-        Debug.Log("volviendo inicio");
-        SceneManager.LoadScene("PortadaJuego");
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        if(SceneManager.GetActiveScene().name == "Juego")
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+        else
+            SceneManager.LoadScene("Juego");
+
     }
 }

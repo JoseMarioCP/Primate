@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class Palabras1 : MonoBehaviour
 {
+    public BotonesPulsados jugar;
+    public GameObject instrucciones;
+    public GameObject canvasPrincipal;
+    public GameObject contenedorImagen;
 
     public Musica sonidos;
     public GameObject contenedor,fondo;
@@ -28,21 +32,33 @@ public class Palabras1 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        generarNumero();
+        //generarNumero();
         // colocar_nombres();
-        StartCoroutine(Nuevo_Numero());
+        //StartCoroutine(Nuevo_Numero());
     }
 
     // Update is called once per frame
     void Update()
     {
-      /*
-        if (Input.GetKeyUp(KeyCode.A))
+
+        if (jugar.pulsado)
         {
+            jugar.pulsado = false;
+            instrucciones.SetActive(false);
+            // ComenzarPartida = false;
             generarNumero();
-            colocar_nombres();
+           // StartCoroutine(Nuevo_Numero());
+            contenedorImagen.SetActive(true);
+            canvasPrincipal.SetActive(true);
         }
-        */
+
+        /*
+          if (Input.GetKeyUp(KeyCode.A))
+          {
+              generarNumero();
+              colocar_nombres();
+          }
+          */
         if (respuestas.Count > 0)
         {
             verificarSeleccion();

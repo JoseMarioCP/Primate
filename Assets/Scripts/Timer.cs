@@ -9,6 +9,7 @@ public class Timer : MonoBehaviour
 	public Text contador;
 	public float tiempo;
 	public bool decrementar=false;
+    public float valorReanudar = 10;
 
 
 
@@ -39,6 +40,7 @@ public class Timer : MonoBehaviour
     //decrementar cada segundo el contador y al llegar a cero la variable decrementar cambia su valor para no seguir decrementando
 	void bajarContador()
 	{
+        
 		tiempo -= Time.deltaTime;
 		contador.text = "Tiempo: "+tiempo.ToString("f0");
 
@@ -53,7 +55,7 @@ public class Timer : MonoBehaviour
     //reiniciar el tiempo o contador
 	public void reanudar()
 	{
-		tiempo = 10;
+		tiempo = valorReanudar;
 		contador.text = "Tiempo: " + tiempo;
 	}
 

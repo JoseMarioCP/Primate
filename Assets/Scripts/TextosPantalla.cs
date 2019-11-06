@@ -6,6 +6,11 @@ using UnityEngine.UI;
 public class TextosPantalla : MonoBehaviour 
 {
 
+    public BotonesPulsados jugar;
+    public GameObject instrucciones;
+    public GameObject canvasPrincipal;
+    public GameObject contenedorImagen;
+    public OpcionesResultado establecerResultado;
     public int numeroMin1 = 0, numeroMax1 = 0, numeroMin2 = 0, numeroMax2 = 0;
 
 
@@ -40,23 +45,11 @@ public class TextosPantalla : MonoBehaviour
 	public BotonesPulsados boton2;
 	public BotonesPulsados boton3;
 
-	/*
-	void Awake()
-	{
-		Intentos = 0;
-		buenas.text = ""+0;
-		malas.text = ""+0;
-
-		//llama al metodo
-		GeneradorNumeros ();
-		boton1.gameObject.SetActive (false);
-		boton2.gameObject.SetActive (false);
-		boton3.gameObject.SetActive (false);
-	}
-	*/
+	
 
 	void Start()
 	{
+        /*
 		puntuacion.Intentos = 0;
 		buenas.text = ""+0;
 		malas.text = ""+0;
@@ -67,14 +60,31 @@ public class TextosPantalla : MonoBehaviour
 		boton1.gameObject.SetActive (false);
 		boton2.gameObject.SetActive (false);
 		boton3.gameObject.SetActive (false);
+        */
 	}
 	// Update is called once per frame
 	void Update ()
 	{
+        if (jugar.pulsado)
+        {
+            jugar.pulsado = false;
+            instrucciones.SetActive(false);
+            contenedorImagen.SetActive(true);
+            canvasPrincipal.SetActive(true);
+            puntuacion.Intentos = 0;
+            buenas.text = "" + 0;
+            malas.text = "" + 0;
+            GeneradorNumeros();
+            boton1.gameObject.SetActive(false);
+            boton2.gameObject.SetActive(false);
+            boton3.gameObject.SetActive(false);
+            establecerResultado.establecerResultado();
 
+            
+        }
 
-		//verifica si no has contestado y el tiempo se ha acabado te incrementara un error y se generaran otros numero
-		if (tiempoRespuesta.tiempo <= 0) 
+        //verifica si no has contestado y el tiempo se ha acabado te incrementara un error y se generaran otros numero
+        if (tiempoRespuesta.tiempo <= 0) 
 		{	
 
 			//se detiene el tema principal de fondo

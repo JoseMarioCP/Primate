@@ -6,6 +6,12 @@ using UnityEngine.UI;
 public class OrdenarNumeros : MonoBehaviour
 {
 
+    public BotonesPulsados jugar;
+    public GameObject instrucciones;
+    public GameObject canvasPrincipal;
+    public GameObject contenedorImagen;
+    public Timer tiempo;
+    public Musica sonidos;
     public GameObject contenedores;
     public int IntentosJugar;
     public Puntos_Contar Marcador;
@@ -14,8 +20,8 @@ public class OrdenarNumeros : MonoBehaviour
 
 
     public Transform respawn1, respawn2,respawn3;
-    public Text numerotxt;
-    public int numero = 0, numeroAnterior=0 , numeroSiguiente = 0;
+    public Text numerotxt1, numerotxt2;
+    public int numero = 0, numeroAnterior=0 , numeroSiguiente = 0, numeroSiguiente2=0;
 
     //public List<GameObject> DAD;
 
@@ -32,20 +38,33 @@ public class OrdenarNumeros : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     { 
-        generarNumero();
-        colocar_nombres();  
+        //generarNumero();
+        //colocar_nombres();  
     }
 
     // Update is called once per frame
     void Update()
     {
-        /*
-        if (Input.GetKeyUp(KeyCode.A))
+        if(tiempo.tiempo<=0)
         {
-            generarNumero();
-            colocar_nombres();
+            Marcador.decrementarPuntos();
+            tiempo.reanudar();
+            sonidos.FueraDeTiempo();
+            StartCoroutine(Nuevo_Numero());
         }
-        */
+
+        if (jugar.pulsado)
+        {
+            jugar.pulsado = false;
+            instrucciones.SetActive(false);
+            contenedorImagen.SetActive(true);
+            canvasPrincipal.SetActive(true);
+            generarNumero();
+            //colocar_nombres();
+            
+        }
+
+        
         if (respuestas.Count > 0)
         {
             verificarSeleccion();
@@ -53,7 +72,7 @@ public class OrdenarNumeros : MonoBehaviour
     }
     public void generarNumero()
     {
-       
+        limpiar_respuestas();
         if (iteraciones >= IntentosJugar)
         {
             // Correcto.text = "Partida Terminada";
@@ -65,27 +84,36 @@ public class OrdenarNumeros : MonoBehaviour
         }
         else
         {
-            numero = Random.Range(2, 9);
-            numerotxt.text = "" + numero;
+            numero = Random.Range(2, 10);
+            numerotxt1.text = "" + numero;
+            numerotxt2.text = "" + (numero + 2);
             numeroAnterior = numero - 1;
             numeroSiguiente = numero + 1;
+            if(numero<=7)
+            {
+                numeroSiguiente2 = numero + 3;
+            }
+            else
+            {
+                numeroSiguiente2 = numero -2;
+            }
+
+            //Invoke("colocar_nombres", 1.5f);
             colocar_nombres();
-
-
         }
-
-
     }
+
+
 
     IEnumerator Nuevo_Numero()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(.2f);
         objGanar.SetActive(false);
         generarNumero();
         
 
     }
-
+    /*
     void CompararRespuestas()
     {
         if(valor1==1 && valor2==1)
@@ -110,7 +138,7 @@ public class OrdenarNumeros : MonoBehaviour
            
         }
     }
-
+    */
     
     void verificarSeleccion()
     {
@@ -125,22 +153,28 @@ public class OrdenarNumeros : MonoBehaviour
                 {
                     if (respuestas[x].gameObject.GetComponent<DAD_Ordenar1>().bloqueado == true)
                     {
-                        if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numeroAnterior)
-                        {
-                            respuestas[x].gameObject.GetComponent<DAD_Ordenar1>().bloqueado = false;
-                            valor1 = 1;
-                        }
-                        else
-                        {
                             if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numeroSiguiente)
                             {
-                                valor2 = 1;
+                              
                                 respuestas[x].gameObject.GetComponent<DAD_Ordenar1>().bloqueado = false;
+                                iteraciones++;
+                                Marcador.incrementarPuntos();
+                                sonidos.Correcta();
+                                StartCoroutine(Nuevo_Numero());
 
                             }
-                          
+                            else
+                            {
+                                respuestas[x].gameObject.GetComponent<DAD_Ordenar1>().bloqueado = false;
+                                iteraciones++;
+                                sonidos.Incorrecta();
+                                 Marcador.decrementarPuntos();
+                                StartCoroutine(Nuevo_Numero());
                         }
-                        
+                        tiempo.contadorCero();
+                        tiempo.reanudar();
+
+
                     }
 
                 }
@@ -150,20 +184,25 @@ public class OrdenarNumeros : MonoBehaviour
                 {
                     if (respuestas[x].gameObject.GetComponent<DAD_Ordenar2>().bloqueado == true)
                     {
-                        if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numeroAnterior)
-                        {
-                            respuestas[x].gameObject.GetComponent<DAD_Ordenar2>().bloqueado = false;
-                            valor1 = 1;
-                        }
-                        else
-                        {
+                        
                             if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numeroSiguiente)
                             {
                                 respuestas[x].gameObject.GetComponent<DAD_Ordenar2>().bloqueado = false;
-                                valor2 = 1;
-                            }
+                            iteraciones++;
+                            sonidos.Correcta();
+                            Marcador.incrementarPuntos();
+                            StartCoroutine(Nuevo_Numero());
                         }
-
+                        else
+                        {
+                            respuestas[x].gameObject.GetComponent<DAD_Ordenar2>().bloqueado = false;
+                            iteraciones++;
+                            sonidos.Incorrecta();
+                            Marcador.decrementarPuntos();
+                            StartCoroutine(Nuevo_Numero());
+                        }
+                        tiempo.contadorCero();
+                        tiempo.reanudar();
                     }
 
                 }
@@ -172,21 +211,25 @@ public class OrdenarNumeros : MonoBehaviour
                 {
                     if (respuestas[x].gameObject.GetComponent<DAD_Ordenar3>().bloqueado == true)
                     {
-                        if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numeroAnterior)
-                        {
-                            valor1 = 1; 
-                            respuestas[x].gameObject.GetComponent<DAD_Ordenar3>().bloqueado = false;
-                           
-                        }
-                        else
-                        {
+                       
                             if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numeroSiguiente)
                             {
                                 respuestas[x].gameObject.GetComponent<DAD_Ordenar3>().bloqueado = false;
-                                valor2 = 1;
-                            }
+                            iteraciones++;
+                            sonidos.Correcta();
+                            Marcador.incrementarPuntos();
+                            StartCoroutine(Nuevo_Numero());
                         }
-
+                        else
+                        {
+                            respuestas[x].gameObject.GetComponent<DAD_Ordenar3>().bloqueado = false;
+                            iteraciones++;
+                            sonidos.Incorrecta();
+                            Marcador.decrementarPuntos();
+                            StartCoroutine(Nuevo_Numero());
+                        }
+                        tiempo.contadorCero();
+                        tiempo.reanudar();
                     }
 
                 }
@@ -195,21 +238,25 @@ public class OrdenarNumeros : MonoBehaviour
                 {
                     if (respuestas[x].gameObject.GetComponent<DAD_Ordenar4>().bloqueado == true)
                     {
-                        if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numeroAnterior)
-                        {
-                            respuestas[x].gameObject.GetComponent<DAD_Ordenar4>().bloqueado = false;
-                            valor1 = 1;
-                        }
-                        else
-                        {
+                       
                             if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numeroSiguiente)
                             {
                                 respuestas[x].gameObject.GetComponent<DAD_Ordenar4>().bloqueado = false;
-                                valor2 = 1;
-                            }
-
+                            iteraciones++;
+                            sonidos.Correcta();
+                            Marcador.incrementarPuntos();
+                            StartCoroutine(Nuevo_Numero());
                         }
-
+                        else
+                        {
+                            respuestas[x].gameObject.GetComponent<DAD_Ordenar4>().bloqueado = false;
+                            iteraciones++;
+                            sonidos.Incorrecta();
+                            Marcador.decrementarPuntos();
+                            StartCoroutine(Nuevo_Numero());
+                        }
+                        tiempo.contadorCero();
+                        tiempo.reanudar();
                     }
 
                 }
@@ -220,21 +267,25 @@ public class OrdenarNumeros : MonoBehaviour
                 {
                     if (respuestas[x].gameObject.GetComponent<DAD_Ordenar5>().bloqueado == true)
                     {
-                        if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numeroAnterior)
-                        {
-                            respuestas[x].gameObject.GetComponent<DAD_Ordenar5>().bloqueado = false;       
-                            valor1 = 1;
-                        }
-                        else
-                        {
+                        
                             if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numeroSiguiente)
                             {
                                 respuestas[x].gameObject.GetComponent<DAD_Ordenar5>().bloqueado = false;
-                                valor2 = 1;
-                            }
-
+                            iteraciones++;
+                            sonidos.Correcta();
+                            Marcador.incrementarPuntos();
+                            StartCoroutine(Nuevo_Numero());
                         }
-
+                        else
+                        {
+                            respuestas[x].gameObject.GetComponent<DAD_Ordenar5>().bloqueado = false;
+                            iteraciones++;
+                            sonidos.Incorrecta();
+                            Marcador.decrementarPuntos();
+                            StartCoroutine(Nuevo_Numero());
+                        }
+                        tiempo.contadorCero();
+                        tiempo.reanudar();
 
 
                     }
@@ -245,23 +296,26 @@ public class OrdenarNumeros : MonoBehaviour
                 {
                     if (respuestas[x].gameObject.GetComponent<DAD_Ordenar6>().bloqueado == true)
                     {
-                        if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numeroAnterior)
-                        {
-                            respuestas[x].gameObject.GetComponent<DAD_Ordenar6>().bloqueado = false; 
-                            valor1 = 1;
-                        }
-                        else
-                        {
+                       
                             if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numeroSiguiente)
                             {
                                 respuestas[x].gameObject.GetComponent<DAD_Ordenar6>().bloqueado = false;
-                                valor2 = 1;
-                            }
+                            iteraciones++;
+                            sonidos.Correcta();
+                            Marcador.incrementarPuntos();
+                            StartCoroutine(Nuevo_Numero());
+                        }
+                        else
+                        {
+                            respuestas[x].gameObject.GetComponent<DAD_Ordenar6>().bloqueado = false;
+                            iteraciones++;
+                            sonidos.Incorrecta();
+                            Marcador.decrementarPuntos();
+                            StartCoroutine(Nuevo_Numero());
                         }
 
-                       
-                      
-
+                        tiempo.contadorCero();
+                        tiempo.reanudar();
                     }
 
                 }
@@ -270,19 +324,25 @@ public class OrdenarNumeros : MonoBehaviour
                 {
                     if (respuestas[x].gameObject.GetComponent<DAD_Ordenar7>().bloqueado == true)
                     {
-                        if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numeroAnterior)
-                        {  
-                            respuestas[x].gameObject.GetComponent<DAD_Ordenar7>().bloqueado = false;                         
-                            valor1 = 1;
-                        }
-                        else
-                        {
+                        
                             if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numeroSiguiente)
                             {
                                 respuestas[x].gameObject.GetComponent<DAD_Ordenar7>().bloqueado = false;
-                                valor2 = 1;
-                            }
+                            iteraciones++;
+                            sonidos.Correcta();
+                            Marcador.incrementarPuntos();
+                            StartCoroutine(Nuevo_Numero());
                         }
+                        else
+                        {
+                            respuestas[x].gameObject.GetComponent<DAD_Ordenar7>().bloqueado = false;
+                            iteraciones++;
+                            sonidos.Incorrecta();
+                             Marcador.decrementarPuntos();
+                            StartCoroutine(Nuevo_Numero());
+                        }
+                        tiempo.contadorCero();
+                        tiempo.reanudar();
 
                     }
 
@@ -292,20 +352,25 @@ public class OrdenarNumeros : MonoBehaviour
                 {
                     if (respuestas[x].gameObject.GetComponent<DAD_Ordenar8>().bloqueado == true)
                     {
-                        if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numeroAnterior)
-                        {
-                            respuestas[x].gameObject.GetComponent<DAD_Ordenar8>().bloqueado = false;
-                            valor1 = 1;
-                        }
-                        else
-                        {
+                       
                             if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numeroSiguiente)
                             {
                                 respuestas[x].gameObject.GetComponent<DAD_Ordenar8>().bloqueado = false;
-                                valor2 = 1;
-                            }
+                            iteraciones++;
+                            sonidos.Correcta();
+                            Marcador.incrementarPuntos();
+                            StartCoroutine(Nuevo_Numero());
                         }
-
+                        else
+                        {
+                            respuestas[x].gameObject.GetComponent<DAD_Ordenar8>().bloqueado = false;
+                            iteraciones++;
+                            sonidos.Incorrecta();
+                            Marcador.decrementarPuntos();
+                            StartCoroutine(Nuevo_Numero());
+                        }
+                        tiempo.contadorCero();
+                        tiempo.reanudar();
                     }
 
                 }
@@ -314,20 +379,25 @@ public class OrdenarNumeros : MonoBehaviour
                 {
                     if (respuestas[x].gameObject.GetComponent<DAD_Ordenar9>().bloqueado == true)
                     {
-                        if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numeroAnterior)
-                        {
-                            respuestas[x].gameObject.GetComponent<DAD_Ordenar9>().bloqueado = false;                          
-                            valor1 = 1;
-                        }
-                        else
-                        {
+                       
                             if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numeroSiguiente)
                             {
                                 respuestas[x].gameObject.GetComponent<DAD_Ordenar9>().bloqueado = false;
-                                valor2 = 1;
-                            }
+                            iteraciones++;
+                            sonidos.Correcta();
+                            Marcador.incrementarPuntos();
+                            StartCoroutine(Nuevo_Numero());
                         }
-
+                        else
+                        {
+                            respuestas[x].gameObject.GetComponent<DAD_Ordenar9>().bloqueado = false;
+                            iteraciones++;
+                            sonidos.Incorrecta();
+                            Marcador.decrementarPuntos();
+                            StartCoroutine(Nuevo_Numero());
+                        }
+                        tiempo.contadorCero();
+                        tiempo.reanudar();
                     }
 
                 }
@@ -336,21 +406,27 @@ public class OrdenarNumeros : MonoBehaviour
                 {
                     if (respuestas[x].gameObject.GetComponent<DAD_Ordenar10>().bloqueado == true)
                     {
-                        if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numeroAnterior)
-                        {
-                            respuestas[x].gameObject.GetComponent<DAD_Ordenar10>().bloqueado = false;
-                            valor1 = 1;
+                       
+                            if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numeroSiguiente)
+                            {
+                             
+                                respuestas[x].gameObject.GetComponent<DAD_Ordenar10>().bloqueado = false;
+                            iteraciones++;
+                            sonidos.Correcta();
+                            Marcador.incrementarPuntos();
+                            StartCoroutine(Nuevo_Numero());
                         }
                         else
                         {
-                            if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numeroSiguiente)
-                            {
-                                valor2 = 1;
-                                respuestas[x].gameObject.GetComponent<DAD_Ordenar10>().bloqueado = false;
-
-                            }
-
+                            respuestas[x].gameObject.GetComponent<DAD_Ordenar10>().bloqueado = false;
+                            iteraciones++;
+                            sonidos.Incorrecta();
+                            Marcador.decrementarPuntos();
+                            StartCoroutine(Nuevo_Numero());
                         }
+                        tiempo.contadorCero();
+                        tiempo.reanudar();
+
 
 
 
@@ -362,15 +438,58 @@ public class OrdenarNumeros : MonoBehaviour
 
             }
 
-            if(valor1!=0 && valor2!=0)
-            {
-                CompararRespuestas();
-            }
+            
+                //CompararRespuestas();
+            
         }
     }
 
 
-    //establecer numero anterior y siguiente
+    void colocar_nombres()
+    {
+
+
+        /*
+        respuestas.Add(Instantiate(numeros[numeroSiguiente], respawn1.transform.position, Quaternion.identity));
+        respuestas.Add(Instantiate(numeros[numeroAnterior], respawn2.transform.position, Quaternion.identity));
+        respuestas.Add(Instantiate(numeros[numeroSiguiente2], respawn3.transform.position, Quaternion.identity));
+       
+        establecerAnteriorSiguiente();
+         */
+        //int n1;
+        int posicion = Random.Range(1, 4);
+
+
+        switch (posicion)
+        {
+            case 1:
+                respuestas.Add(Instantiate(numeros[numeroSiguiente], respawn1.transform.position, Quaternion.identity));
+                respuestas.Add(Instantiate(numeros[numeroAnterior], respawn2.transform.position, Quaternion.identity));
+                respuestas.Add(Instantiate(numeros[numeroSiguiente2], respawn3.transform.position, Quaternion.identity));
+
+                break;
+
+            case 2:
+                respuestas.Add(Instantiate(numeros[numeroAnterior], respawn1.transform.position, Quaternion.identity));
+                respuestas.Add(Instantiate(numeros[numeroSiguiente], respawn2.transform.position, Quaternion.identity));
+                respuestas.Add(Instantiate(numeros[numeroSiguiente2], respawn3.transform.position, Quaternion.identity));
+
+                break;
+
+            case 3:
+                respuestas.Add(Instantiate(numeros[numeroAnterior], respawn1.transform.position, Quaternion.identity));
+                respuestas.Add(Instantiate(numeros[numeroSiguiente2], respawn2.transform.position, Quaternion.identity));
+                respuestas.Add(Instantiate(numeros[numeroSiguiente], respawn3.transform.position, Quaternion.identity));
+
+                break;
+        }
+        establecerAnteriorSiguiente();
+
+    }
+
+
+
+    //establecer el contendedor del objeto, donde debe ser arrastrado
 
     void establecerAnteriorSiguiente()
     {
@@ -382,272 +501,48 @@ public class OrdenarNumeros : MonoBehaviour
             {
 
                 if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre ==1 )
-                {
-                  
-                        if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numeroAnterior)
-                        {
                         respuestas[x].gameObject.GetComponent<DAD_Ordenar1>().posicionContenedor = GameObject.Find("Contenedor_1").transform;
 
-                        }
-
-                        if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numeroSiguiente)
-                        {
-                        respuestas[x].gameObject.GetComponent<DAD_Ordenar1>().posicionContenedor = GameObject.Find("Contenedor_2").transform;
-
-
-                    }
-
-                    
-
-                }
-
                 if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == 2)
-                {
-                    
-                    if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numeroAnterior)
-                    {
                         respuestas[x].gameObject.GetComponent<DAD_Ordenar2>().posicionContenedor = GameObject.Find("Contenedor_1").transform;
 
-                    }
+                if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == 3)  
+                        respuestas[x].gameObject.GetComponent<DAD_Ordenar3>().posicionContenedor = GameObject.Find("Contenedor_1").transform;
 
-                    if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numeroSiguiente)
-                    {
-                        respuestas[x].gameObject.GetComponent<DAD_Ordenar2>().posicionContenedor = GameObject.Find("Contenedor_2").transform;
-                    }
+                 if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == 4)
+                        respuestas[x].gameObject.GetComponent<DAD_Ordenar4>().posicionContenedor = GameObject.Find("Contenedor_1").transform;
 
-                }
-                  
-                    if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == 3)
-                    {
-                       
-                        if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numeroAnterior)
-                        {
-                            respuestas[x].gameObject.GetComponent<DAD_Ordenar3>().posicionContenedor = GameObject.Find("Contenedor_1").transform;
-
-                        }
-
-                        if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numeroSiguiente)
-                        {
-                            respuestas[x].gameObject.GetComponent<DAD_Ordenar3>().posicionContenedor = GameObject.Find("Contenedor_2").transform;
-    
-                        }
-
-                    }
-                        if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == 4)
-                        {
-                           
-                            if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numeroAnterior)
-                            {
-                                respuestas[x].gameObject.GetComponent<DAD_Ordenar4>().posicionContenedor = GameObject.Find("Contenedor_1").transform;
-
-                            }
-
-                            if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numeroSiguiente)
-                            {
-                                respuestas[x].gameObject.GetComponent<DAD_Ordenar4>().posicionContenedor = GameObject.Find("Contenedor_2").transform;
-
-                            }
-
-                        }
-
-                        if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == 5)
-                        {
-                           
-                            if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numeroAnterior)
-                            {
-                                respuestas[x].gameObject.GetComponent<DAD_Ordenar5>().posicionContenedor = GameObject.Find("Contenedor_1").transform;
-
-                            }
-
-                            if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numeroSiguiente)
-                            {
-                                respuestas[x].gameObject.GetComponent<DAD_Ordenar5>().posicionContenedor = GameObject.Find("Contenedor_2").transform;
-
-                            }
-
-                        }
-
+                if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == 5)
+                        respuestas[x].gameObject.GetComponent<DAD_Ordenar5>().posicionContenedor = GameObject.Find("Contenedor_1").transform;
 
                 if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == 6)
-                {
-
-                    if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numeroAnterior)
-                    {
-                        respuestas[x].gameObject.GetComponent<DAD_Ordenar6>().posicionContenedor = GameObject.Find("Contenedor_1").transform;
-
-                    }
-
-                    if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numeroSiguiente)
-                    {
-                        respuestas[x].gameObject.GetComponent<DAD_Ordenar6>().posicionContenedor = GameObject.Find("Contenedor_2").transform;
-
-                    }
-
-                }
-
-
+                     respuestas[x].gameObject.GetComponent<DAD_Ordenar6>().posicionContenedor = GameObject.Find("Contenedor_1").transform;
+  
                 if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == 7)
-                {
-
-                    if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numeroAnterior)
-                    {
                         respuestas[x].gameObject.GetComponent<DAD_Ordenar7>().posicionContenedor = GameObject.Find("Contenedor_1").transform;
 
-                    }
-
-                    if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numeroSiguiente)
-                    {
-                        respuestas[x].gameObject.GetComponent<DAD_Ordenar7>().posicionContenedor = GameObject.Find("Contenedor_2").transform;
-
-                    }
-
-                }
-
                 if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == 8)
-                {
-
-                    if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numeroAnterior)
-                    {
                         respuestas[x].gameObject.GetComponent<DAD_Ordenar8>().posicionContenedor = GameObject.Find("Contenedor_1").transform;
 
-                    }
-
-                    if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numeroSiguiente)
-                    {
-                        respuestas[x].gameObject.GetComponent<DAD_Ordenar8>().posicionContenedor = GameObject.Find("Contenedor_2").transform;
-
-                    }
-
-                }
 
                 if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == 9)
-                {
-
-                    if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numeroAnterior)
-                    {
                         respuestas[x].gameObject.GetComponent<DAD_Ordenar9>().posicionContenedor = GameObject.Find("Contenedor_1").transform;
-
-                    }
-
-                    if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numeroSiguiente)
-                    {
-                        respuestas[x].gameObject.GetComponent<DAD_Ordenar9>().posicionContenedor = GameObject.Find("Contenedor_2").transform;
-  
-                    }
-
-                }
+                    
 
                 if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == 10)
-                {
-
-                    if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numeroAnterior)
-                    {
                         respuestas[x].gameObject.GetComponent<DAD_Ordenar10>().posicionContenedor = GameObject.Find("Contenedor_1").transform;
-
-                    }
-
-                    if (respuestas[x].gameObject.GetComponent<Caracteristica>().Numero_Nombre == numeroSiguiente)
-                    {
-                        respuestas[x].gameObject.GetComponent<DAD_Ordenar10>().posicionContenedor = GameObject.Find("Contenedor_2").transform;
-
-                    }
-
-                }
 
 
             }   //fin del ciclo
-
+            StartCoroutine(esperarDecrementar());
 
         }
-
     }
 
-
-
-    void colocar_nombres()
+    IEnumerator esperarDecrementar()
     {
-        limpiar_respuestas();
-
-
-       // respuestas.Add(Instantiate(numeros[numero], respawn1.transform.position, Quaternion.identity));
-        respuestas.Add(Instantiate(numeros[numeroAnterior], respawn2.transform.position, Quaternion.identity));
-        respuestas.Add(Instantiate(numeros[numeroSiguiente], respawn3.transform.position, Quaternion.identity));
-
-        establecerAnteriorSiguiente();
-
-        // int n1, n2;
-        //int posicion = Random.Range(1, 3);
-
-        /*
-        switch (posicion)
-        {
-            case 1:
-
-                respuestas.Add(Instantiate(numeros[numero], respawn1.transform.position, Quaternion.identity));
-
-                n1 = Random.Range(1, 10);
-                if (n1 == numero)
-                {
-                    n1 = Random.Range(1, 10);
-                }
-
-                respuestas.Add(Instantiate(numeros[numeroAnterior], respawn2.transform.position, Quaternion.identity));
-
-                n2 = Random.Range(1, 10);
-                if (n1 == n2 || n2 == numero)
-                {
-                    n2 = Random.Range(1, 10);
-                }
-
-                respuestas.Add(Instantiate(numeros[numeroSiguiente], respawn3.transform.position, Quaternion.identity));
-
-                break;
-
-            case 2:
-                n1 = Random.Range(1, 10);
-                if (n1 == numero)
-                {
-                    n1 = Random.Range(1, 10);
-                }
-
-                respuestas.Add(Instantiate(numeros[n1], respawn1.transform.position, Quaternion.identity));
-
-
-                respuestas.Add(Instantiate(numeros[numero], respawn2.transform.position, Quaternion.identity));
-
-                n2 = Random.Range(1, 10);
-                if (n1 == n2 || n2 == numero)
-                {
-                    n2 = Random.Range(1, 10);
-                }
-
-                respuestas.Add(Instantiate(numeros[n2], respawn3.transform.position, Quaternion.identity));
-
-                break;
-
-            case 3:
-                n1 = Random.Range(1, 10);
-                if (n1 == numero)
-                {
-                    n1 = Random.Range(1, 10);
-                }
-
-                respuestas.Add(Instantiate(numeros[n1], respawn1.transform.position, Quaternion.identity));
-
-                n2 = Random.Range(1, 10);
-                if (n1 == n2 || n2 == numero)
-                {
-                    n2 = Random.Range(1, 10);
-                }
-
-                respuestas.Add(Instantiate(numeros[n2], respawn2.transform.position, Quaternion.identity));
-
-
-                respuestas.Add(Instantiate(numeros[numero], respawn3.transform.position, Quaternion.identity));
-
-                break;
-        }
-        */
+        yield return new WaitForSeconds(1f);
+        tiempo.decrementar = true;
     }
 
     public void limpiar_respuestas()

@@ -798,6 +798,7 @@ MonoBehaviour:
   contador: {fileID: 1979456445}
   tiempo: 10
   decrementar: 0
+  valorReanudar: 10
 --- !u!114 &541409864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -835,10 +836,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2114d23d78315ff449b8bd95718bc727, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transiciones: {fileID: 0}
+  transiciones: {fileID: 541409866}
   reinciar: {fileID: 2026583533}
   VolverMenu: {fileID: 316069693}
   esena: Nivel 1(Resta)
+  portada: PortadaPrimero
 --- !u!114 &541409866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -864,6 +866,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7743cce78cadc684b8aa032e11ce5030, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  esena: PortadaPrimero
   transiciones: {fileID: 541409866}
   canvasPausa: {fileID: 489167235}
   BS: {fileID: 1706643089}
@@ -2322,8 +2325,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tema: {fileID: 1342131114}
-  RespuestaC: {fileID: 8300000, guid: fb0fb09e4dc601b4e8c545cca474c1be, type: 3}
-  RespuestaI: {fileID: 8300000, guid: 21029bb72536558428018f1a6b302e20, type: 3}
+  brotarObjeto: {fileID: 0}
+  RespuestaC: {fileID: 8300000, guid: 3ed3c4268dd76624ba88937459ea3055, type: 3}
+  RespuestaI: {fileID: 8300000, guid: bbfad315fbfdc7f49a6db40609c2c67f, type: 3}
   TiempoLimite: {fileID: 8300000, guid: 02791be446e36e046a6e58fc5224df97, type: 3}
 --- !u!82 &1342131114
 AudioSource:

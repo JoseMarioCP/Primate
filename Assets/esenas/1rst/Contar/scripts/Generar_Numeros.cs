@@ -5,6 +5,15 @@ using UnityEngine.UI;
 
 public class Generar_Numeros : MonoBehaviour
 {
+
+   
+    public GameObject Canasta;
+
+ //   public bool ComenzarPartida = false;
+    public BotonesPulsados jugar;
+    public GameObject instrucciones;
+
+    public GameObject imagenPuntos;
     public Musica sonidos;
     public int numeroMinimo, numeroMaximo;
    public int intentos = 0;
@@ -27,9 +36,12 @@ public class Generar_Numeros : MonoBehaviour
     public List<GameObject> respuestas;
 
 
+   
+
+
     private void Start()
     {
-        Generacion_Numeros(numeroMinimo, numeroMaximo);
+        //Generacion_Numeros(numeroMinimo, numeroMaximo);
         //colocar_nombres();
     }
 
@@ -38,6 +50,16 @@ public class Generar_Numeros : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(jugar.pulsado)
+        {
+            Canasta.SetActive(true);
+            jugar.pulsado = false;
+            instrucciones.SetActive(false);
+           // ComenzarPartida = false;
+            Generacion_Numeros(numeroMinimo, numeroMaximo);
+            imagenPuntos.SetActive(true);
+        }
+        
         verificar_Respuesta();
 
         
@@ -69,7 +91,7 @@ public class Generar_Numeros : MonoBehaviour
         {
             yield return new WaitForSeconds(0.5f);
             objetos.Add(Instantiate(muestra, instanciador.transform.position + espacio, Quaternion.identity));
-            espacio = espacio + new Vector3(Random.Range(-2,2), 0f, 0f);
+            espacio = espacio + new Vector3(Random.Range(-1,1), 0f, 0f);
             sonidos.brotar();
         }
         yield return new WaitForSeconds(1.5f);

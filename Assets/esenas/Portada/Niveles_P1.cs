@@ -6,36 +6,55 @@ using UnityEngine.SceneManagement;
 
 public class Niveles_P1 : MonoBehaviour
 {
+    public Animator transicionPrincipal;
+    public ObjetoEsenas objetoIndes;
+    public Animator animacionFinal;
     public Button b1, b2, b3, b4, b5, b6;
     public string n1, n2, n3, n4, n5, n6;
+    
+    IEnumerator cargarEsena(string escena)
+    {
+        objetoIndes.capa = 1;
+
+        transicionPrincipal.SetTrigger("salir");
+            yield return new WaitForSeconds(1.2f);
+        SceneManager.LoadScene(escena);
+    }
+
     // Update is called once per frame
     public void contar()
     {
-        SceneManager.LoadScene(n1);
+        
+        StartCoroutine(cargarEsena(n1));
+        //SceneManager.LoadScene(n1);
     }
     public void numerosPalabras()
     {
-        SceneManager.LoadScene(n2);
+        StartCoroutine(cargarEsena(n2));
+        //SceneManager.LoadScene(n2);
     }
 
     public void compararNumeros()
     {
-        SceneManager.LoadScene(n3);
+        StartCoroutine(cargarEsena(n3));
+        //SceneManager.LoadScene(n3);
     }
     public void numeroSiguiente()
     {
-        SceneManager.LoadScene(n4);
+        StartCoroutine(cargarEsena(n4));
+        //SceneManager.LoadScene(n4);
     }
 
 
     public void Patrones()
     {
-        
-        SceneManager.LoadScene(n5);
+        StartCoroutine(cargarEsena(n5));
+        //SceneManager.LoadScene(n5);
     }
 
     public void Suma()
     {
-        SceneManager.LoadScene(n6);
+        StartCoroutine(cargarEsena(n6));
+ //       SceneManager.LoadScene(n6);
     }
 }

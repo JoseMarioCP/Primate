@@ -5,6 +5,12 @@ using UnityEngine.UI;
 public class Comparar : MonoBehaviour
 {
 
+    public BotonesPulsados jugar;
+    public GameObject instrucciones;
+    public GameObject canvasPrincipal;
+    public GameObject contenedorImagen;
+
+
     public Musica sonidos;
 
     public GameObject contenedor;
@@ -32,21 +38,24 @@ public class Comparar : MonoBehaviour
     void Start()
     {
 
-        generarNumero();
-        colocar_nombres();
+        //generarNumero();
+        //colocar_nombres();
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-
-        if (Input.GetKeyUp(KeyCode.A))
+        if (jugar.pulsado)
         {
+            jugar.pulsado = false;
+            instrucciones.SetActive(false);
             generarNumero();
-          
+            colocar_nombres();
+            contenedorImagen.SetActive(true);
+            canvasPrincipal.SetActive(true);
         }
+
 
         if (respuestas.Count > 0)
         {

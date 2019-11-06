@@ -38,7 +38,7 @@ public class OpcionesResultado : MonoBehaviour
 	void Start () 
 	{
 		//al inciar el nivel tarda el tiempo establecido en aparecer las respuestas
-		Invoke("establecerResultado",1.5f);
+		//Invoke("establecerResultado",1.5f);
 
 	}
 	

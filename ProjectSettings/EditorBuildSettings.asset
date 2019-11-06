@@ -21,12 +21,21 @@ EditorBuildSettings:
     path: Assets/esenas/1rst/OrdenNumeros/N1 OrdenNumeros.unity
     guid: 161a2a812219af7419df53a7417d9035
   - enabled: 1
-    path: Assets/esenas/1rst/Operaciones Aritmecias/Suma/Nivel 1(Suma).unity
-    guid: 63a5864eca018674aa0574a55cf3dac4
-  - enabled: 1
-    path: Assets/baldo/Scenes/Juego.unity
-    guid: 5e6e8f2adf399e949957e577f945d289
-  - enabled: 1
     path: Assets/baldo/Scenes/PatronesMenu.unity
-    guid: 4ad34fb073c99834981c027fca535edb
+    guid: d93b513752f047e4f956c1d1918bcfed
+  - enabled: 1
+    path: Assets/esenas/1rst/Operaciones Aritmecias/SumaResta1/Nivel 1(SumaResta).unity
+    guid: d32f9d34a38c72542864c91b88f4660e
+  - enabled: 1
+    path: Assets/esenas/2nd/ParImpar/N2 ParImpar.unity
+    guid: 4fe6a5bd7ebd45548ac0e5639ec261cf
+  - enabled: 1
+    path: Assets/esenas/2nd/SumaResta2/Nivel 2(SumaResta).unity
+    guid: 553c17e5254633c42805e133aa141c96
+  - enabled: 1
+    path: Assets/esenas/2nd/Multiplicacion/Nivel 2(Multiplicacion).unity
+    guid: 88904c70d2de1c94ba570bf7e9c267d4
+  - enabled: 1
+    path: Assets/esenas/2nd/Division/Nivel 2(Division).unity
+    guid: d2a573d8b4ff90043a938bed65f2c604
   m_configObjects: {}

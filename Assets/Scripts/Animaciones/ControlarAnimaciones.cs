@@ -11,11 +11,6 @@ public class ControlarAnimaciones : MonoBehaviour
     public void animacionFinal()
     {
 
-        transicion.SetTrigger("Animacion");
+        transicion.SetTrigger("salir");
     }
-
-        
-       
-       
- 
 }
